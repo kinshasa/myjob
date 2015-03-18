@@ -1,0 +1,87 @@
+/* 
+    Document   : index
+    Created on : 2012-12-11, 9:43:31
+    Author     : ShaoboLiu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+h1{
+    text-align: center;
+}
+body {
+    /*background:#347db0;*/
+    background-color: #000000;
+    background-image: url(../src/bg_dark.png);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-family: "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+#intputdata .button{
+    width: 74px;
+    float: left;
+}
+
+#intputdata{
+    width: 30%;
+}
+#intputdata table {
+    font-size: 13px;
+    background:#347db0;
+    text-align: center;
+}
+#intputdata #t1234{
+    width: 187px;
+}
+#intputdata td input{
+    width: 98%;
+}
+#submitdata{
+    float: left; position: relative;
+    width:65%;
+    height: 500px ;
+    margin-left: 10px;font-size: 12px;
+}
+#dialog-form{
+    font-size: 13px;
+}
+
+
+input.text { margin-bottom:7px; width:95%; padding: .4em; }
+.dialog fieldset { padding:0; border:0; margin-top:25px; }
+.dialog .ui-state-error { padding: .3em; }
+.dialog .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+/*combobox*/
+.ui-combobox {
+    position: relative;
+    display: inline-block;
+}
+.ui-widget{
+    /*width: 100%;不能解决*/
+    font-size: 13px;
+}
+.ui-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -34px;
+    /*margin-left: -1px;*/
+    padding: 0;
+    /* adjust styles for IE 6/7 */
+    /*height: 1.7em;*/
+    /*top: 0.1em;*/
+}
+.ui-combobox-input {
+    margin: 0;
+    padding: 0.2em;
+}
+
+
+div{
+    /*border: solid red ;*/
+    border-bottom-width: thick;
+}

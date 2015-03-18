@@ -1,0 +1,95 @@
+<?php
+
+/*
+ * Overtime beta1.0 
+ * Used by SRC-G S/W 2Gourp 4Part
+ * Overtime Tables
+ * Edit by shaob.liu@samsung.com
+ * Donation:https://me.alipay.com/liushaobo
+ * mysql_register.php created at 2012/12/26
+ */
+//109.131.18.222/Overtime/method/mysql_register.php?genid=1&genid=2&password=3&password2=3&single=2&email=3&pcip=1&infor=dawdaw
+
+/*
+ * 用户注册时
+ * 首先插入overtime_user个人信息
+ * 其次创建$genid_tablename个人加班统计表
+ */
+
+$genid = $_POST["genid"];
+$name = $_POST["name"];
+$password = $_POST["password"];
+$single = $_POST["single"];
+$email = $single . "@samsung.com";
+$pcip = $_POST["pcip"];
+$infor = $_POST["name"];
+
+if (!$genid && $password)
+    exit(1);
+$con = mysql_connect("localhost:3306", "root", "cercis");
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
+}
+
+mysql_select_db("applicationdb", $con);
+$mysql_insert_user = "
+    INSERT INTO `applicationdb`.`overtime_user`
+    (
+        `genid`,`name`,`password`,`single`,
+        `pcip`,`email`,`infor`
+    )
+        VALUES
+    (
+        \"" . $genid . "\",\"" . $name . "\",\"" . $password . "\",\"" . $single . "\",
+        \"" . $pcip . "\",\"" . $email . "\",\"" . $infor . "\"
+    );";
+
+$genid_tablename = "ot_" . $genid . "_data";
+$mysql_createtable = "
+    CREATE  TABLE `applicationdb`.`" . $genid_tablename . "` (
+        `gid` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'gid：自动加1' ,
+        `genid` INT UNSIGNED NOT NULL COMMENT '个人ID' ,
+        `name` VARCHAR(45) NOT NULL COMMENT '姓名' ,
+        `work_date` INT NOT NULL COMMENT '日期(eg：20121218)' ,
+        `daytype` INT UNSIGNED NOT NULL COMMENT '勤态星期代码' ,
+        `time_from` INT UNSIGNED NOT NULL COMMENT '计划开始时间' ,
+        `time_end` INT UNSIGNED NOT NULL COMMENT '计划完了时间' ,
+        `work_minutes` INT UNSIGNED NOT NULL COMMENT '计划加班时间' ,
+        `work_reason` TEXT NOT NULL COMMENT '加班事由其他' ,
+        `monthc_hours` INT UNSIGNED NOT NULL COMMENT '本月已申请加班时间（h）' ,
+        `monthl_hours` INT UNSIGNED NOT NULL COMMENT '上月实际加班时间（h）' ,
+        `l_actual_hours` INT UNSIGNED ZEROFILL NULL COMMENT '上次实际加班时间（h）' ,
+        `c_actual_hours` INT UNSIGNED ZEROFILL NULL COMMENT '当天实际加班时间（h）' ,
+        /*`insert_date` DATETIME NOT NULL DEFAULT NOW() COMMENT 'insert date' ,*/
+        `insert_date` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `ot_type` INT NULL COMMENT '加班类型：一次，二次' ,
+        `infor` TEXT NULL COMMENT '备注' ,
+        PRIMARY KEY (`gid`) 
+    );
+";
+
+$mysql_insert = "
+    INSERT INTO  `applicationdb`.`" . $genid_tablename . "`
+    (
+         `genid`, `name`, `work_date`, `daytype`,`time_from`,
+         `time_end`, `work_minutes`, `work_reason`, `monthc_hours`,`monthl_hours`,
+         `l_actual_hours`, `c_actual_hours`, `insert_date`, `infor`
+    )
+     VALUES 
+    (
+        '1', '2', '3', '4', '5',
+         '6', '7', '8', '9', '10', 
+        '11', '12', '13', '14'
+    );
+";
+
+
+if (!(mysql_query($mysql_insert_user) && mysql_query($mysql_createtable))) {
+    die('Could not connect: ' . mysql_error());
+    echo TRUE;
+    mysql_close($con);
+    exit(1);
+}
+echo FALSE;
+mysql_close($con);
+?>

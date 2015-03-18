@@ -1,0 +1,49 @@
+<?php
+
+/*
+ * Overtime beta1.0 
+ * Used by SRC-G S/W 2Gourp 4Part
+ * Overtime Tables
+ * Edit by shaob.liu@samsung.com
+ * Donation:https://me.alipay.com/liushaobo
+ * mysql_register.php created at 2012/12/26
+ */
+//109.131.18.222/Overtime/method/mysql_register.php?genid=1&genid=2&password=3&password2=3&single=2&email=3&pcip=1&infor=dawdaw
+$genid = $_POST["genid"];
+$name = $_POST["name"];
+$password = $_POST["password"];
+$single = $_POST["single"];
+$email = $single . "@samsung.com";
+$pcip = $_POST["pcip"];
+$infor = $_POST["name"];
+
+if (!$genid && $password)
+    exit(1);
+$con = mysql_connect("localhost:3306", "root", "cercis");
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
+}
+
+mysql_select_db("applicationdb", $con);
+$mysql_res = "
+    INSERT INTO `applicationdb`.`overtime_user`
+    (
+        `genid`,`name`,`password`,`single`,
+        `pcip`,`email`,`update`,`infor`
+    )
+        VALUES
+    (
+    
+        \"" . $genid . "\",\"" . $name . "\",\"" . $password . "\",\"" . $single . "\",
+        \"" . $pcip . "\",\"" . $email . "\", CURDATE() ,\"" . $infor . "\"
+    );";
+
+if (!$mysql_data = mysql_query($mysql_res)) {
+    die('Could not connect: ' . mysql_error());
+    echo '注册失败，请稍后再试';
+    mysql_close($con);
+    exit(1);
+}
+echo "注册成功！";
+mysql_close($con);
+?>

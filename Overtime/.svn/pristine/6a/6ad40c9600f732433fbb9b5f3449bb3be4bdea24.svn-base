@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+        <title>加班申请网</title>
+        <meta name="author" content="Jeff McKenna, Gateway Geomatics" />
+        <link rel="stylesheet" href="jquery/css/ui-darkness/jquery-ui-1.9.2.custom.css" />
+        <script src="jquery/js/jquery-1.8.3.js"></script>
+        <script src="jquery/js/jquery-ui-1.9.2.custom.js"></script>   
+        <link  rel="stylesheet" href="./css/index.css"/>
+        <script type="text/javascript" src="./js/main.js"></script> 
+    </head>
+    <body>
+        <h1>S/W 2 Group 4 Part加班申请 </h1>
+        <p>您仍未登录<font id="watch" color = red;> </font></p>
+        <p id="ptime">
+            <?php
+            include 'method/head.php';
+            echo '自动创建"' . $file_name . '"文件到"' . $file_rode . '" 底下';
+            ?>
+        </p>        
+        <div id="intputdata" style=" float: left; ">
+            <data>
+                <table border="1">
+                    <tr>
+                        <td><a>姓名</a></td>
+                        <td><input  type="text"id="user_name"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>个人ID</a></td>
+                        <td><input  type="text" id="user_id"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>日期</a></td>
+                        <td><input  type="text" id="user_date"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>勤态星期代码</a></td>
+                        <td><input  type="text" id="user_week"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>计划开始时间</a></td>
+                        <td><input  type="text" id="user_start"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>计划完了时间</a></td>
+                        <td><input  type="text" id="user_end"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>计划加班时间</a></td>
+                        <td><input  type="text" id="user_hours"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>加班事由其他</a></td>
+                        <td><textarea  rows="3" type="text" id="user_reason"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><a>本月已申请加班时间（h）</a></td>
+                        <td><input  type="text" id="user_time_c"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>上月实际加班时间（h）</a></td>
+                        <td><input  type="text" id="user_time_l"/></td>
+                    </tr>
+                </table>
+                <br/>
+                <button  id="submit" >submit</button>
+                <button  id="check"  >check</button>
+            </data>
+        </div>
+        <div style="float: left"id="submitdata">
+            <a style=" float:left;position: relative">here will html submition data</a>
+        </div>  
+
+        <div id="dialog-form" title="Create">
+            <p class="validateTips">All form fields are required.</p>
+
+            <form>
+                <fieldset>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
+        </div>
+
+        <a target="_blank" href="https://me.alipay.com/liushaobo" title="小小赞助大大帮助">
+            <img src="./src/pay_encourage.png" width="159" height="37" alt="支付鼓励" align="absmiddle">
+        </a>
+
+        <?php
+
+        function GetIP() {
+            if ($_SERVER["HTTP_X_FORWARDED_FOR"])
+                $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+            else if ($_SERVER["HTTP_CLIENT_IP"])
+                $ip = $_SERVER["HTTP_CLIENT_IP"];
+            else if ($_SERVER["REMOTE_ADDR"])
+                $ip = $_SERVER["REMOTE_ADDR"];
+            else if (getenv("HTTP_X_FORWARDED_FOR"))
+                $ip = getenv("HTTP_X_FORWARDED_FOR");
+            else if (getenv("HTTP_CLIENT_IP"))
+                $ip = getenv("HTTP_CLIENT_IP");
+            else if (getenv("REMOTE_ADDR"))
+                $ip = getenv("REMOTE_ADDR");
+            else
+                $ip = "Unknown";
+            return $ip;
+        }
+
+        echo '<a>您的IP地址：<font color = red>' . GetIP() . '</font>.  </a>';
+        echo '<a>made by shaob.liu@samsung.com</a>';
+        ?>
+    </body>
+
+</html>
+
+

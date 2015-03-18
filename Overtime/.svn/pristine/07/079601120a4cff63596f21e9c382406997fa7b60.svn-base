@@ -1,0 +1,185 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+        <title>加班申请网</title>
+        <meta name="author" content="Jeff McKenna, Gateway Geomatics" />
+        <link rel="stylesheet" href="jquery/css/ui-darkness/jquery-ui-1.9.2.custom.css" />
+        <script src="jquery/js/jquery-1.8.3.js"></script>
+        <script src="jquery/js/jquery-ui-1.9.2.custom.js"></script>   
+        <link  rel="stylesheet" href="./css/index.css"/>
+        <script type="text/javascript" src="./js/main.js"></script> 
+    </head>
+    <body>
+        <?php include 'method/head.php'; ?>
+        <h1>S/W 2 Group 4 Part加班申请 </h1>
+        <p><font id="watch" color = red;>当前时间是：</font></p>
+        <div id="dlogin"><a id="alogin" href="##" style="color:red">立即登录</a></div>
+        <p id="ptime" >
+            <?php echo "自动创建" . $file_fullname; ?>
+            <a href="./output/<?php echo $file_name ?>"style="color:red">[立即打开]</a>
+        </p>        
+        <div id="intputdata" style=" float: left; ">
+            <data>
+                <table border="1">
+                    <tr>
+                        <td><a>姓名</a></td>
+                        <td><input readonly="1" type="text"id="user_name"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>个人ID</a></td>
+                        <td><input readonly="1" type="text" id="user_genid"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>日期</a></td>
+                        <td><input  type="text" id="user_date"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>勤态星期代码</a></td>
+                        <td>
+                            <select id="user_week">
+                                <option value="1">1：平日 </option>
+                                <option value="3">3：周休</option>
+                                <option value="4">4：法定</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a>计划时间段</a></td>
+                        <td id="t1234">
+
+                            <select id="user_start">
+                                <option value="0">开始时间：</option>
+                                <option value="0830">08：30</option>
+                                <option value="1830">18：30</option>
+                                <option value="2000">20：00</option>
+                                <option value="1830">18：30</option>
+
+                            </select>
+
+                            <select id="user_end" style="">
+                                <option value="0">截止时间：</option>
+                                <option value="1730">17：30</option>
+                                <option value="2030">20：30</option>
+                                <option value="2330">23：30</option>
+                                <option value="2400">24：00</option>
+                            </select>
+
+<!--<input  type="text" id="user_start"/>-->
+                        </td>
+                    </tr>
+<!--                    <tr>
+                        <td><a>计划完了时间</a></td>
+                        <td>
+                            <input  type="text" id="user_end"/>
+                            <input  type="text"style="width: 50%" id="user_end"/>
+                            <input  type="text" style="width: 50%" id="user_end2"/>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td><a>计划加班时间</a></td>
+                        <td><input  type="text" id="user_hours"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>加班事由其他</a></td>
+                        <td><textarea  rows="3" type="text" id="user_reason"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><a>本月已申请加班时间（h）</a></td>
+                        <td><input  type="text" id="user_time_c"/></td>
+                    </tr>
+                    <tr>
+                        <td><a>上月实际加班时间（h）</a></td>
+                        <td><input  type="text" id="user_time_l"/></td>
+                    </tr>
+                </table>
+                <br/>
+                <input type="button" id="submit" class="button submit" value="submit"/>
+                <input type="button" id="check" class="button check" value="check"/>
+            </data>
+        </div>
+        <div style="float: left"id="submitdata">
+            <a style=" float:left;position: relative">
+                一次表格（计划加班统计表）
+                <br/>                <br/>
+
+                1.IDNO 输入员工的GEN;
+                <br/>
+                2. WORKDT: 输入加班日期.例如20120516;
+                <br/>
+                3.WEEKCD:  输入 1平日, 3周休,4法定;
+                <br/>
+                4.FRTIME: 输入加班的开始时间,例如 201205021830;
+                <br/>
+                5.ENTIME: 输入加班的结束时间,例如 201205022130
+                <br/>                <br/>
+                <br/>
+                二次表格（超过计划范围内的请第二天重新按照这个表格申请）
+                <br/>                <br/>
+
+                1.IDNO: 输入员工的GEN;
+                <br/>
+                2.WORKDT: 输入加班日期.例如20120516;
+                <br/>
+                3.FRTIME: 输入加班的开始时间,例如 201205021830;
+                <br/>
+                4.ENTIME: 输入加班的结束时间,例如 201205022130;
+                <br/>
+                5.OTTIME: 输入加班多少分钟;
+                <br/>
+                6.WORKTIME: 输入工作时间，一般为480分钟;
+                <br/>
+                7.OTCAUSEETC: 输入加班原因;
+                <br/>
+                8.WEEKCD：输入 1平日, 3周休,4法定;
+                <br/>
+                9.WORKTYPECD：输入工作形态代码 A;
+            </a>
+        </div>  
+
+        <div id="dialog-create" title="Create" class="dialog" style="display: none">
+            <form>
+                <fieldset>
+                    <label for="genid">Genid(12570990)</label>
+                    <input type="text" name="genid" id="genid" class="text ui-widget-content ui-corner-all" />
+                    <label for="name">Name(刘少波)</label>
+                    <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+                    <label for="single">SingleID(shaob.liu)</label>
+                    <input type="text" name="single" id="single" class="text ui-widget-content ui-corner-all" />
+                    <!--                    <label for="email">Email(shaob.liu@samsung.com)</label>
+                                        <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />-->
+                    <label for="password">Password(a1234)</label>
+                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+                    <!--                    <label for="password">Infor</label>
+                                        <input type="password" name="infor" id="infor" value="" class="text ui-widget-content ui-corner-all" />-->
+                </fieldset>
+            </form>
+            <p class="validateTips" style="text-align: center"><?php echo '您的IP地址：<font color = red>' . GetIP() . '</font> .'; ?></p>
+        </div>
+        <div id="dialog-login" title="Login" class="dialog" style="display: none">
+            <form>
+                <fieldset>
+                    <label for="name">Genid</label>
+                    <input type="text" name="genidlg" id="genidlg" class="text ui-widget-content ui-corner-all" />
+                    <label for="password">Password</label>
+                    <input type="password" name="passwordlg" id="passwordlg"  class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
+            <p  class="validateTips2"  style="text-align: center"><?php echo '您的IP地址：<font color = red>' . GetIP() . '</font> .'; ?></p>
+        </div>
+
+
+        <a target="_blank" href="https://me.alipay.com/liushaobo" title="小小赞助大大帮助">
+            <img src="./src/pay_encourage.png" width="159" height="37" alt="支付鼓励" align="absmiddle">
+        </a>
+
+        <?php
+        echo '<a>您的IP地址：<font id="pcip" color = red>' . GetIP() . '</font>.  </a>';
+        echo '<a>made by shaob.liu@samsung.com</a>';
+        ?>
+    </body>
+
+</html>
+
+

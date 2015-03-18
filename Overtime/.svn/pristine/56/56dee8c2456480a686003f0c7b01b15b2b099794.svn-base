@@ -1,0 +1,86 @@
+<?php
+
+/*
+ * Overtime beta1.0 
+ * Used by SRC-G S/W 2Gourp 4Part
+ * Overtime Tables
+ * Edit by shaob.liu@samsung.com
+ * Donation:https://me.alipay.com/liushaobo
+ */
+include_once 'head.php';
+$con = mysql_connect("localhost:3306", "root", "cercis");
+if (!$con) {
+    //die('Could not connect: ' . mysql_error());
+    mysql_close($con);
+    echo FALSE;
+    exit(1);
+}
+mysql_select_db("applicationdb", $con);
+/*
+ * 创建当前日期的表$mysql_tablename，存储当前日期的提交表格 
+ * 首先添加到 $genid_tablename
+ * 其次计算该用户当月、上月申请加班时间和实际加班时间，上次和当天加班时间
+ * 最后添加到 $date_tablename
+ * 如果$date_tablename未创建，则创建$mysql_create_datetable
+ */
+$date_tablename = "ot_" . MYSQL_WORKSHEET1 . "_" . CURRENT_DATE . "_data";
+
+/*
+ * $mysql_insert_usertable
+ * 从个人加班统计表中计算本月已申请加班时间，上月申请加班时间，然后再insert
+ */
+$genid = $_GET["genid"];
+$genid_tablename = "ot_" . $genid . "_data";
+$mysql_insertgenidtable = "
+    INSERT INTO  `applicationdb`.`" . $genid_tablename . "`
+         (
+             `genid`, `name`, `work_date`, `daytype`,`time_from`,
+             `time_end`, `work_minutes`, `work_reason`, `monthc_hours`,`monthl_hours`,
+             `l_actual_hours`, `c_actual_hours`, `insert_date`,`ot_type`, `infor`
+          )
+    VALUES
+        (
+          '1', '2', '3', '" . CURRENT_DATE . "', '5',
+          '6', '7', '8', '9', '10',
+          '11', '12',  CURDATE(), 13,'14'
+        );    
+";
+if (!mysql_query($mysql_insertgenidtable)) {
+    die('$mysql_insertgenidtable Could not connect: ' . mysql_error());
+    echo FALSE;
+    exit(1);
+}
+echo 'mysql_query($mysql_insertgenidtable) success';
+$name = "91";
+$mysql_insert_datetable = "
+    INSERT INTO `applicationdb`.`" . $date_tablename . "` 
+        (
+            `genid`, `name`, `work_date`, `daytype`, `time_from`,
+            `time_end`, `work_minutes`, `work_reason`, `monthc_hours`, `monthl_hours`,
+            `l_actual_hours`, `c_actual_hours`,`insert_date`, `infor`
+        )
+    VALUES
+        (
+            '" . $name . "', '" . $name . "', '" . $name . "', '" . $name . "', '" . $name . " ',
+            '" . $name . "', '" . $name . "', '" . $name . "', '" . $name . "', '" . $name . "', 
+            '" . $name . "', '" . $name . "', CURDATE()      , '" . $name . "'
+        );
+";
+/*
+  exit(1);
+  mysql_close($con);
+
+  if (!mysql_query($mysql_create_datetable)) {
+  die('$mysql_create_datetable Could not connect: ' . mysql_error());
+  } else {
+  echo '123';
+  } */
+if (!mysql_query($mysql_insert_datetable)) {
+    die('$mysql_insert_datetable Could not connect: ' . mysql_error());
+    mysql_close($con);
+    echo FALSE;
+    exit(1);
+}
+echo TRUE;
+mysql_close($con);
+?>

@@ -1,0 +1,17 @@
+<?php
+
+/*
+ * Overtime beta1.0 
+ * Used by SRC-G S/W 2Gourp 4Part
+ * Overtime Tables
+ * Edit by shaob.liu@samsung.com
+ * Donation:https://me.alipay.com/liushaobo
+ */
+$mysql_insert_usertable = "
+    INSERT INTO
+        `applicationdb`.`overtime_lsb_data` (`genid`, `name`, `work_date`, `daytype`, `time_from`, `time_end`, `work_minutes`, `work_reason`, `monthc_hours`, `monthl_hours`, `l_actual_hours`, `c_actual_hours`,`insert_date`, `infor`)
+    VALUES
+        (' . $genid .', ' . $name . ', '3', '4', '5', '6', '7', '8', '9', '0', '9', '1', '2','CURDATE()', 'text');
+";
+
+?>
